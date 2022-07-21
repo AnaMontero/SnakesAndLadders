@@ -1,8 +1,10 @@
 package net.voxelgroup.application;
 
 import net.voxelgroup.classes.Player;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import static net.voxelgroup.utilities.PlayerCreator.createPlayer;
 import static net.voxelgroup.utilities.RandomCreator.*;
 
