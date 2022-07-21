@@ -3,9 +3,7 @@ package net.voxelgroup.utilities;
 import net.voxelgroup.classes.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static net.voxelgroup.utilities.RandomCreator.generateRandomColor;
 import static net.voxelgroup.utilities.RandomCreator.rollDice;
 import static org.junit.jupiter.api.Assertions.*;

@@ -40,7 +40,7 @@ public class Game {
         this.choosePlayersName();
     }
 
-    public void choosePlayersName() {
+    private void choosePlayersName() {
         System.out.println("Select 1 to choose name or 2 to skip name selection");
         int selection = this.scanner.nextInt();
         for (int i = 1; i <= numberOfPlayers; i++) {
@@ -59,7 +59,7 @@ public class Game {
         }
     }
 
-    public void playGame() {
+    private void playGame() {
         int turn = 1;
         boolean exit = false;
         do {
