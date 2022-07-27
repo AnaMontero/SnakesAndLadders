@@ -17,10 +17,6 @@ public class Player {
         return name.toUpperCase();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPosition() {
         return position;
     }
@@ -33,10 +29,6 @@ public class Player {
         return tokenColor;
     }
 
-    public void setTokenColor(String tokenColor) {
-        this.tokenColor = tokenColor;
-    }
-
     public boolean isWinner() {
         return winner;
     }
@@ -45,9 +37,4 @@ public class Player {
         this.winner = winner;
     }
 
-    public void moveToken(int diceNumber) {
-        int currentPosition = this.getPosition();
-        int newPosition = currentPosition + diceNumber;
-        this.setPosition(newPosition);
-    }
 }
