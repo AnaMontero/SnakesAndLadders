@@ -3,7 +3,7 @@ package net.voxelgroup.utilities;
 import net.voxelgroup.classes.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.assertj.core.api.Assertions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +26,6 @@ class RandomCreatorTest {
         range.add(3);
         range.add(4);
         range.add(5);
-
         range.add(6);
         assertThat(rollDice()).isIn(range);
     }

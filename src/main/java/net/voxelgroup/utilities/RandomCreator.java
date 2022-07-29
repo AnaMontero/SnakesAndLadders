@@ -27,8 +27,7 @@ public final class RandomCreator {
     }
 
     public static int randomFirstPlayer(int maxPlayers) {
-        int randomNumber = random.nextInt(0, maxPlayers );
-        return randomNumber;
+        return random.nextInt(0, maxPlayers);
     }
 
     public static String generateRandomColor() {
