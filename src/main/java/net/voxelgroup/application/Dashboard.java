@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static net.voxelgroup.utilities.RandomCreator.randomFirstPlayer;
 import static net.voxelgroup.utilities.RandomCreator.rollDice;
 
 public class Dashboard {
-    private final int MAX_TILE = 100;
     private final Game game = new Game();
     private final Scanner scanner = new Scanner(System.in);
     private int numberOfPlayers;
-    private String playerName;
     List<Player> playerList = new ArrayList<>();
 
     public void start() {
@@ -22,8 +21,9 @@ public class Dashboard {
         this.pressEnter();
         System.out.print("How many players? (minimum 2): ");
         numberOfPlayers = scanner.nextInt();
+        numberOfPlayers = game.selectPlayers(numberOfPlayers);
         this.selectPlayerName();
-        this.playTurn();
+        this.playTurns();
         pressEnter();
     }
 
@@ -32,6 +32,7 @@ public class Dashboard {
         int selection = this.scanner.nextInt();
         for (int i = 1; i <= numberOfPlayers; i++) {
 
+            String playerName;
             switch (selection) {
                 case 1 -> {
                     System.out.print("Enter player " + i + " name: ");
@@ -44,10 +45,34 @@ public class Dashboard {
         }
     }
 
-    private Player selectFirstPlayer(){
-        var firstPlayer = playerList.get(RandomCreator.randomFirstPlayer(game.selectPlayers(numberOfPlayers)));
+    private void selectFirstPlayer() {
+        var firstPlayer = playerList.get(randomFirstPlayer(numberOfPlayers));
+        playerList.remove(firstPlayer);
+        playerList.add(0, firstPlayer);
         System.out.printf("%s starts!!\n", firstPlayer.getName());
-        return firstPlayer;
+    }
+
+    private void playTurns() {
+        selectFirstPlayer();
+        boolean exit = false;
+
+        int turn = 1;
+        while (!exit) {
+            System.out.printf("Turn #%s: \n", turn);
+            System.out.println("-------------------");
+            for (Player player : playerList) {
+                int diceNumber = rollDice();
+                int playerPosition = player.getPosition();
+                int newPosition = game.moveToken(diceNumber, player);
+                System.out.printf("%s rolls %d and moves from tile %d to tile %d\n", player.getName(), diceNumber, playerPosition, newPosition);
+                exit = game.winnerCondition(player);
+                if (game.winnerCondition(player)) {
+                    exit = true;
+                }
+            }
+            turn++;
+            System.out.println("-------------------");
+        }
     }
 
     private void createBoard() {
@@ -57,6 +82,7 @@ public class Dashboard {
         System.out.println("---------------Game Board---------------");
 
         while (counter > 0) {
+            int MAX_TILE = 100;
             if (counter % 10 == 0 && counter != MAX_TILE) {
                 if (iteration == -1) {
                     counter -= 9;
@@ -66,53 +92,12 @@ public class Dashboard {
                     counter -= 10;
                     iteration = -1;
                 }
-                if (counter != 0)
-                    System.out.print("\n" + counter + "\t");
-            } else
-                System.out.print(counter + "\t");
+                if (counter != 0) System.out.print("\n" + counter + "\t");
+            } else System.out.print(counter + "\t");
             counter += iteration;
         }
         System.out.println();
         System.out.println("----------------------------------------");
-    }
-
-    private void playTurn(){
-        Player currentPlayer = this.selectFirstPlayer();
-        while(!currentPlayer.isWinner()) {
-            int turn = 1;
-            System.out.printf("Turn #%s: \n", turn);
-            game.winnerCondition(currentPlayer);
-            int diceNumber = rollDice();
-            int playerPosition = currentPlayer.getPosition();
-            int newPosition = game.moveToken(diceNumber, currentPlayer);
-            System.out.printf("%s rolls %d and moves from tile %d to tile %d\n", currentPlayer.getName(), diceNumber, playerPosition, newPosition);
-        }
-//        turn++;
-//        int nextPlayer = playerList.indexOf(currentPlayer) + 1;
-//        playerList.get(nextPlayer);
-//        do {
-//
-//            for (Player player : this.playerList) {
-//                int diceNumber = rollDice();
-//                int playerPosition = player.getPosition();
-//                System.out.printf("%s in tile %s rolls %s\n", player.getName(), playerPosition, diceNumber);
-//                int newPosition = playerPosition + diceNumber;
-//                if (newPosition == 100) {
-//                    System.out.printf("%s is the WINNER!!\n", player.getName());
-//                    player.setWinner(true);
-//                    exit = true;
-//                    break;
-//                } else if (newPosition > 100) {
-//                    System.out.println("Can't move further than 100. Roll again! ");
-//                } else {
-//                    player.moveToken(diceNumber);
-//                    System.out.printf("Moving to tile %s\n", newPosition);
-//                }
-//            }
-//            System.out.println("----------------");
-//            turn++;
-//        }
-//        while (game.winnerPlayer(player));
     }
 
     private void pressEnter() {
