@@ -1,7 +1,6 @@
 package net.voxelgroup.application;
 
 import net.voxelgroup.classes.Player;
-import net.voxelgroup.utilities.RandomCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public class Dashboard {
         this.pressEnter();
         System.out.print("How many players? (minimum 2): ");
         numberOfPlayers = scanner.nextInt();
-        numberOfPlayers = game.selectPlayers(numberOfPlayers);
+        numberOfPlayers = game.setMinimumPlayers(numberOfPlayers);
         this.selectPlayerName();
         this.playTurns();
         pressEnter();
@@ -55,8 +54,8 @@ public class Dashboard {
     private void playTurns() {
         selectFirstPlayer();
         boolean exit = false;
-
         int turn = 1;
+
         while (!exit) {
             System.out.printf("Turn #%s: \n", turn);
             System.out.println("-------------------");
@@ -65,9 +64,10 @@ public class Dashboard {
                 int playerPosition = player.getPosition();
                 int newPosition = game.moveToken(diceNumber, player);
                 System.out.printf("%s rolls %d and moves from tile %d to tile %d\n", player.getName(), diceNumber, playerPosition, newPosition);
-                exit = game.winnerCondition(player);
-                if (game.winnerCondition(player)) {
+                if (game.winnerCondition(player, newPosition)) {
+                    System.out.printf("GAME ENDED! Player %s won!!\n", player.getName());
                     exit = true;
+                    break;
                 }
             }
             turn++;
