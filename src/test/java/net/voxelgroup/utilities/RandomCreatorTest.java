@@ -3,10 +3,12 @@ package net.voxelgroup.utilities;
 import net.voxelgroup.classes.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
-import static net.voxelgroup.utilities.RandomCreator.generateRandomColor;
-import static net.voxelgroup.utilities.RandomCreator.rollDice;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
+import static net.voxelgroup.utilities.RandomCreator.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class RandomCreatorTest {
     private Player testPlayer;
@@ -18,41 +20,23 @@ class RandomCreatorTest {
 
     @Test
     void test_rollDice_ok() {
-        ArrayList<Integer> rollingList = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
-            rollingList.add(rollDice());
-        }
-        boolean diceCheck = rollingList.contains(5);
-        assertTrue(diceCheck);
+        List<Integer> range = new ArrayList<>();
+        range.add(1);
+        range.add(2);
+        range.add(3);
+        range.add(4);
+        range.add(5);
+        range.add(6);
+        assertThat(rollDice()).isIn(range);
     }
 
     @Test
-    void test_rollDice_nok() {
-        ArrayList<Integer> rollingList = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
-            rollingList.add(rollDice());
-        }
-        boolean diceCheck = rollingList.contains(7);
-        assertFalse(diceCheck);
+    void test_randomFirstPlayer_ok() {
+        List<Integer> range = new ArrayList<>();
+        range.add(0);
+        range.add(1);
+        range.add(2);
+        assertThat(randomFirstPlayer(2)).isIn(range);
     }
 
-    @Test
-    void test_generateRandomColor_ok() {
-        ArrayList<String> colorList = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
-            colorList.add(generateRandomColor());
-        }
-        boolean colorCheck = colorList.contains("green");
-        assertTrue(colorCheck);
-    }
-
-    @Test
-    void test_generateRandomColor_nok() {
-        ArrayList<String> colorList = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
-            colorList.add(generateRandomColor());
-        }
-        boolean colorCheck = colorList.contains(testPlayer.getTokenColor());
-        assertFalse(colorCheck);
-    }
 }

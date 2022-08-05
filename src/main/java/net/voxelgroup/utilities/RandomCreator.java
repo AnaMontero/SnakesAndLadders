@@ -26,6 +26,10 @@ public final class RandomCreator {
         return random.nextInt(6) + 1;
     }
 
+    public static int randomFirstPlayer(int maxPlayers) {
+        return random.nextInt(0, maxPlayers);
+    }
+
     public static String generateRandomColor() {
         String tokenColor;
         int colorNumber = random.nextInt(colorsList.length);

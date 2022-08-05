@@ -2,8 +2,8 @@ package net.voxelgroup.classes;
 
 public class Player {
     private int position;
-    private String name;
-    private String tokenColor;
+    private final String name;
+    private final String tokenColor;
     private boolean winner;
 
     public Player(String name, String tokenColor) {
@@ -17,24 +17,12 @@ public class Player {
         return name.toUpperCase();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPosition() {
         return position;
     }
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public String getTokenColor() {
-        return tokenColor;
-    }
-
-    public void setTokenColor(String tokenColor) {
-        this.tokenColor = tokenColor;
     }
 
     public boolean isWinner() {
@@ -45,9 +33,4 @@ public class Player {
         this.winner = winner;
     }
 
-    public void moveToken(int diceNumber) {
-        int currentPosition = this.getPosition();
-        int newPosition = currentPosition + diceNumber;
-        this.setPosition(newPosition);
-    }
 }
