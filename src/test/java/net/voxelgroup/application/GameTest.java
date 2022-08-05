@@ -1,7 +1,6 @@
 package net.voxelgroup.application;
 
 import net.voxelgroup.classes.Player;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +14,10 @@ class GameTest {
     private Player testPlayer;
     private final List<Player> testPlayerList = new ArrayList<>();
     private Game testGame;
-
     @BeforeEach
     void setUp() {
         testPlayer = new Player("Test Player", generateRandomColor());
         testGame = new Game();
-    }
-
-    @AfterEach
-    void tearDown() {
     }
 
     @Test

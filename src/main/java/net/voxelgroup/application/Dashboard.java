@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
 import static net.voxelgroup.utilities.RandomCreator.randomFirstPlayer;
 import static net.voxelgroup.utilities.RandomCreator.rollDice;
 
@@ -15,7 +16,7 @@ public class Dashboard {
     private int numberOfPlayers;
     List<Player> playerList = new ArrayList<>();
 
-    public void start() {
+    public void start() throws InterruptedException {
         createBoard();
         this.pressEnter();
         System.out.print("How many players? (minimum 2): ");
@@ -23,7 +24,6 @@ public class Dashboard {
         numberOfPlayers = game.setMinimumPlayers(numberOfPlayers);
         this.selectPlayerName();
         this.playTurns();
-        pressEnter();
     }
 
     private void selectPlayerName() {
@@ -51,7 +51,7 @@ public class Dashboard {
         System.out.printf("%s starts!!\n", firstPlayer.getName());
     }
 
-    private void playTurns() {
+    private void playTurns() throws InterruptedException {
         selectFirstPlayer();
         boolean exit = false;
         int turn = 1;
@@ -63,6 +63,7 @@ public class Dashboard {
                 int diceNumber = rollDice();
                 int playerPosition = player.getPosition();
                 int newPosition = game.moveToken(diceNumber, player);
+                sleep(400L);
                 System.out.printf("%s rolls %d and moves from tile %d to tile %d\n", player.getName(), diceNumber, playerPosition, newPosition);
                 if (game.winnerCondition(player, newPosition)) {
                     System.out.printf("GAME ENDED! Player %s won!!\n", player.getName());
