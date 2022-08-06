@@ -27,7 +27,7 @@
 
 ---
 
-### 💻 Presentacion del proyecto
+### 💻 Presentación del proyecto
 
 1. Hay dos ramas - master y gameImprovement.
 2. En `master` se puede encontrar una primera versión, mientras que en `gameImprovement` **se han aplicado mejoras**
@@ -46,14 +46,14 @@
 
 ---
 
-### 📃 Descripcion del proyecto
+### 📃 Descripción del proyecto
 
 * El proyecto se encuentra dividido en diferentes paquetes, con idea de presentar una clara estructura
 * Dicha división se intenta adaptar el SRP, separando las clases en:
     * paquete `application`: estas clases manejan la ejecución del juego, una controla la lógica de presentación (
       Dashboard) y la otra la del progreso del juego (Game)
     * paquete `classes`: contiene aquellas clases que servirán para la creación de objetos diversos que tengas una
-      repsesentación en el juego, como Player. Debido a la sencillez de la aplicación no se han valorado otras, pero de
+      representación en el juego, como Player. Debido a la sencillez de la aplicación no se han valorado otras, pero de
       cara a mejoras futuras se podrían añadir otras, por ejemplo un tablero, en el que se definan en qué casillas se
       encontrará escaleras o serpientes
     * paquete `utilities`: clases de apoyo al progreso del juego, en éste caso para crear elementos aleatorios como son
@@ -62,7 +62,7 @@
     * Selección de número de jugadoras - de elegir menos de 2, se reestablece a 2 para permitir que la partida pueda
       ejecutarse.
     * Se crean el número de jugadoras elegidas, con un color aleatorio (que representa a una ficha), y un nombre o bien
-      elegido por la usuario, o por defecto como PLAYER#
+      elegido por la usuaria, o por defecto como PLAYER#
         * ▶️️ Dar opción a poder elegir el nombre puede enriquecer la
           experiencia de usuaria.
     * Se inicia el juego en el que turno a turno se va viendo el progreso de la partida, las tiradas y posiciones de
@@ -80,5 +80,5 @@ En la carpeta [test](src/test/java) se encuentra:
 
 * GameTest: comprueba que siempre existan 2 jugadoras, que se crean correctamente, que el movimiento se ejecuta como se
   esper, y que puedan proclamarse como ganadoras
-* RandomCreatorTest: asegura que tnato la tirada de dados como la selección aleatoria de primera jugadora generan datos
+* RandomCreatorTest: asegura que tanto la tirada de dados como la selección aleatoria de primera jugadora generan datos
   que se encuentran dentro de un rango esperado
